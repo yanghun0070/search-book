@@ -9,14 +9,14 @@
 ### API
 Method	| Path	| Description	| User authenticated	
 ------------- | ------------------------- | ------------- |:-------------:|
-GET	| /search/books/{keyType}	| 책 검색을 위한 API이다. keyword 검색만 지원된다.	|
-GET	| /search/histories/{keyType}	| 나의 검색 히스토리(키워드, 검색 일시)를 제공한다.	|
-GET	| /search/tops/{keyType}	| 사람들이 검색한 10개의 검색 키워드를 제공합니다. | 	
-POST | /accounts/login	| 가입한 아이디/패스워드를 통해 로그인 서비스를 제공한다. 	| × 
-PUT	| /accounts/signup | 회원 가입 서비스를 제공한다. | × 
+GET	| /search/books/{keyType}	| 책 검색을 위한 API이다. 	|
+GET	| /search/histories	| 나의 검색 히스토리(키워드, 검색 일시)를 제공한다.	|
+GET	| /search/tops	| 사람들이 검색한 10개의 검색 키워드를 제공합니다. | 	
+POST | /account/login	| 가입한 아이디/패스워드를 통해 로그인 서비스를 제공한다. 	| × 
+PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | × 
 
 
-#### 회원가입
+#### 1. 회원가입
 회원정보는 이름, 아이디, 비밀번호로 구성된다.
 테스트는 아래 curl을 통해 가능하다.
 ``` 
@@ -26,7 +26,7 @@ curl -X PUT -d '{ "name" : "이동진", "login_id" : "joinnewuser", "password" :
 성공인 경우 응답 메시지는 존재하지 않고 http status code 200 이다.
 
 
-#### 로그인
+#### 2. 로그인
 회원 가입시 설정한 아이디/패스우드를 통해 로그인을 한다. 
 로그인 결과 private key로 sign된 jwt 형태의 token과 username, authorities정보를 응답 받는다.
 
@@ -51,7 +51,7 @@ curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json
   } 
 ``` 
 
-#### 책 검색
+#### 3. 책 검색
 책 검색 기능은 키워드를 통한 검색만 지원한다. 키워드는 values parameter를 통해 URL encode하여 전달한다.
 
 로그인시 발급 받은 jwt token을 Authorization Bearer 형태로 전송 해야한다.
@@ -110,7 +110,7 @@ application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 
 ``` 
 
 
-#### 내 검색 히스토리
+#### 4. 내 검색 히스토리
 내 검색 키워드 히스토리 검색 키워드 역순으로 제공된다.
 
 페이징 처리를 위해 size와 page 파라미터를 Optional로 제공된다(default size = 0, page = 1).
@@ -148,7 +148,7 @@ curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H
   "page_count" : 1
 }
 ``` 
-####  인기 키워드 목록
+####  5. 인기 키워드 목록
 인기 키워드 목록은 키워드 검색 횟수 역순으로 제공된다.
 
 인증세션이 존재하여야하며 책 검색과 동일하게 로그인시 발급 받은 jwt token을 Authorization Bearer 형태로 전송 해야한다.
@@ -182,7 +182,6 @@ curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H
   } ]
 }
 ```
-
 
 ## Notes
 build in spring boot framework version 2.2.4.RELEASE
