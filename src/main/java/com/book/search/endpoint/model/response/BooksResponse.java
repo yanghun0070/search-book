@@ -4,10 +4,12 @@ import com.book.search.common.data.BookData;
 import com.book.search.common.data.BookResultData;
 import com.book.search.endpoint.SerializedFieldNames;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
+@Builder
 @Data
 public class BooksResponse {
     @JsonProperty(value = SerializedFieldNames.TOTAL_COUNT)

@@ -15,6 +15,19 @@ GET	| /search/tops	| 사람들이 검색한 10개의 검색 키워드를 제공�
 POST | /account/login	| 가입한 아이디/패스워드를 통해 로그인 서비스를 제공한다. 	| × 
 PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | × 
 
+### 테스트 
+아래 절차대로 소스를 다운 및 컴파일 하고 
+
+1.$ git clone https://github.com/djzend2k/search-book.git
+
+2.$ cd search-book/
+
+3.$ ./gradlew build -x test
+
+4.$ ./gradlew bootRun
+
+서비스가 실행되면 아래 회원가입/로그인/책 검색/내 검색 히스토리/ 인기검색 키워드 테스트가 가능하다.
+
 
 #### 1. 회원가입
 회원정보는 이름, 아이디, 비밀번호로 구성된다.
@@ -27,10 +40,12 @@ curl -X PUT -d '{ "name" : "이동진", "login_id" : "joinnewuser", "password" :
 
 
 #### 2. 로그인
-회원 가입시 설정한 아이디/패스우드를 통해 로그인을 한다. 
-로그인 결과 private key로 sign된 jwt 형태의 token과 username, authorities정보를 응답 받는다.
+회원 가입시 설정한 아이디/패스워드를 통해 로그인을 수행한다. 
+로그인 결과 인증 token과 username, authorities정보등을 응답 받는다.
 
-발급한 token의 expire time은 48시간이다. 
+인증 token는 jwt형태의 token이며 signed된 jwe 형태로 제공된다.
+
+발급된 jwt token의 expire time은 48시간이다. 
 48시간 이후에는 token이 만료되어 사용할 수 없다.
 
 
@@ -47,7 +62,7 @@ curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json
     "authorities" : [ {
       "authority" : "ROLE_MEMBER"
     } ],
-    "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJtZW1iZXJJZCIgOiAzLAogICJ1c2VybmFtZSIgOiAiam9pbnVzZXIiLAogICJncmFudGVkQXV0aG9yaXRpZXMiIDogWyAiUk9MRV9NRU1CRVIiIF0sCiAgImFjY291bnROb25FeHBpcmVkIiA6IHRydWUsCiAgImFjY291bnROb25Mb2NrZWQiIDogdHJ1ZSwKICAiY3JlZGVudGlhbHNOb25FeHBpcmVkIiA6IHRydWUsCiAgImVuYWJsZWQiIDogdHJ1ZQp9.oFMZRzJu-gJU6LmVLLxYmhxQY2NaqPmx4YQY--Jg91uJHM04UtjkLkQc53iaEuULGbitDPCM0LHXppDLVyT6ZC7FDqMSlRDauICHh7RR3Un7ABHsAoz_dzqtqwSD886pYNhsHPPp3uMfwEZe1GlYHzayWmgno6pqvZIgRUaol3CDmhImCr_IiFXAPuETH4ieMCEuoe65IjHCEVxrf5ACGXK1dW0icy2dpwQ-5R6-XfjQgZmD8JFwBAjwLzPn2YUskxcgS5l7nwo9oz7a-kPwevlRjie_ye0TsCjxdCJikjlE0kOT_j0ybuPA4ujxj2cSTtCEDja65-sIfihPBBTcog"
+    "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogImU3N0c3cDhZZXkzWGhOdXlFQ3NJdDlTaktueVBwcVZGZEN4UElpM3VCNDA9IiwKICAiZXhwIiA6IDE1ODE2ODg5MjQsCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.OoG2RW9yNVaHsHLxLfoaISv-JjUESqyAhLt60dq4pjPnAyY2Qws9GbaOZOlooOJBjvRzGHlsCLVVbQZ_Ni0xbdF-7FoyH2Fkp_WKPy7GOD08JgC9FDDasGT9QI3Ryo65btAV-C14eJly9ct_W2GoOw7r0qnWhBxdrlotFqmNqGVPOi4ZyVRtE07FUeybJ2A6EUcnmQ1oS-Y3XMzapwunTgv6IwX21YgXE-zl7Iw1fvYU4hTmxiIUrAuVXFAEpZb3kQ8mV_NrCYBYRgSBBaB_I0MlJ6XOFZ4rvW7O2szyWm2J5xm1UPhsOCMo1DrJ51pGjV-I8OJuDnHpKCOiM--q6A"
   } 
 ``` 
 
@@ -67,7 +82,7 @@ token 검증은 signed key verify 를 통해 검증한다.
 
 책 검색 예제는 아래와 같이 수행한다. 
 ``` 
-curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogIk9MdTY4REVocmF6RlNqZlJtU20zU3J4S0pJMXV3UXN0K3psOGpVUkZySDg9IiwKICAiZXhwIiA6IDE1ODE2ODUxMDksCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.BjDspJAJc3jsPhfYSw2Xk4EcNUUxbuswjoNpcE11g_vt2oegdg8ZfS0XECJ4GZ9uvF-RUH7D27eAJMe7oxvHQn10b6IsUxS4SRKNGa2DmAcFaR7zSEk9dmHWqkzYKxOOhkZB92CTiwm45AIQJzWEHB5lnI0AHxTDtWGbK1b557IrhmqDoDD8Tx0lnHwAvU3o2xi4KhOmPH3mGDyTaRjqkpUc6-uNphPMgh7M8ojCT_MgMjj0ksRWdhGmTHTq1g_98ObWsofrhTvfkZKCkxFJH4xEMj7I-KebI3Clyyd9zW073k0-wCy03etcnk6pn41GyrgXJvD057yRHcFCHDIurA" -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/search/books/tilte?query=test&page=1&size=10 -v
+curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogImU3N0c3cDhZZXkzWGhOdXlFQ3NJdDlTaktueVBwcVZGZEN4UElpM3VCNDA9IiwKICAiZXhwIiA6IDE1ODE2ODg5MjQsCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.OoG2RW9yNVaHsHLxLfoaISv-JjUESqyAhLt60dq4pjPnAyY2Qws9GbaOZOlooOJBjvRzGHlsCLVVbQZ_Ni0xbdF-7FoyH2Fkp_WKPy7GOD08JgC9FDDasGT9QI3Ryo65btAV-C14eJly9ct_W2GoOw7r0qnWhBxdrlotFqmNqGVPOi4ZyVRtE07FUeybJ2A6EUcnmQ1oS-Y3XMzapwunTgv6IwX21YgXE-zl7Iw1fvYU4hTmxiIUrAuVXFAEpZb3kQ8mV_NrCYBYRgSBBaB_I0MlJ6XOFZ4rvW7O2szyWm2J5xm1UPhsOCMo1DrJ51pGjV-I8OJuDnHpKCOiM--q6A" -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/search/books/tilte?query=test&page=1&size=10 -v
 
 ```
 

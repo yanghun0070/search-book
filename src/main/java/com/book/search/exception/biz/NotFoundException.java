@@ -6,4 +6,8 @@ public class NotFoundException extends BusinessException {
     public NotFoundException() {
         super("not found resource");
     }
+
+    public NotFoundException(String message) {
+        super(message);
+    }
 }

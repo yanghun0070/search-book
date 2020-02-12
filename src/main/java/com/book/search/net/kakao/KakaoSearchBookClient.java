@@ -46,7 +46,7 @@ public class KakaoSearchBookClient implements SearchClient<KakaoBooksResponse> {
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
         KakaoBooksResponse response = restTemplate.exchange(resolveUri(request), HttpMethod.GET, entity, KakaoBooksResponse.class).getBody();
         if (response.getBooks() == null || response.getBooks().size() == 0)
-            throw new NotFoundException();
+            throw new NotFoundException("no search result to kakao");
 
         return response;
     }

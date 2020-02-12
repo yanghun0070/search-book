@@ -19,7 +19,7 @@ public class HistoryController {
 
     @GetMapping(Endpoints.SEARCH_HISTORY_ENDPOINT)
     public HistoryResponse history(@RequestParam(name = SerializedFieldNames.SIZE, required = false, defaultValue = "10") int size,
-                                   @RequestParam(name = SerializedFieldNames.PAGE, required = false, defaultValue = "1") int page) throws BusinessException {
+                                   @RequestParam(name = SerializedFieldNames.PAGE, required = false, defaultValue = "1") int page) {
         return historyService.select(size, page);
     }
 }

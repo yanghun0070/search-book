@@ -22,7 +22,7 @@ public class LoginController {
     LoginService loginService;
 
     @PostMapping(Endpoints.ACCOUNT_LOGIN)
-    public LoginResponse login(@Valid @RequestBody LoginRequest request) throws Exception {
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         return loginService.run(request);
     }
 }

@@ -5,5 +5,5 @@ import com.book.search.endpoint.model.response.BooksResponse;
 import com.book.search.exception.BusinessException;
 
 public interface BookService {
-    BooksResponse search(SearchBookRequest request) throws BusinessException;
+    BooksResponse search(SearchBookRequest request);
 }

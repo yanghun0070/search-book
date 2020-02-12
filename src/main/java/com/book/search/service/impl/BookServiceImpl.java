@@ -1,16 +1,18 @@
 package com.book.search.service.impl;
 
+import com.book.search.common.code.ErrorCode;
 import com.book.search.common.data.BookResultData;
 import com.book.search.common.data.UserData;
 import com.book.search.component.BookComponent;
 import com.book.search.component.HistoryComponent;
-import com.book.search.component.MemberComponent;
 import com.book.search.endpoint.model.request.SearchBookRequest;
 import com.book.search.endpoint.model.response.BooksResponse;
-import com.book.search.exception.BusinessException;
+import com.book.search.exception.biz.NotFoundException;
+import com.book.search.exception.http.ErrorException;
 import com.book.search.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -19,30 +21,36 @@ import org.springframework.stereotype.Service;
 public class BookServiceImpl implements BookService {
 
     private HistoryComponent historyComponent;
-    private MemberComponent memberComponent;
     private BookComponent bookComponent;
 
     @Autowired
-    public BookServiceImpl(MemberComponent memberComponent,
-                           BookComponent bookComponent,
+    public BookServiceImpl(BookComponent bookComponent,
                            HistoryComponent historyComponent) {
-        this.memberComponent = memberComponent;
         this.bookComponent = bookComponent;
         this.historyComponent = historyComponent;
     }
 
     @Override
-    public BooksResponse search(SearchBookRequest request) throws BusinessException {
-        BookResultData bookResultData = bookComponent.loadBooks(request);
+    public BooksResponse search(SearchBookRequest request) {
+        BookResultData bookResultData;
+        try {
+            bookResultData = bookComponent.loadBooks(request);
+        } catch (NotFoundException e) {
+            log.error(e.getMessage());
+            throw new ErrorException(HttpStatus.NO_CONTENT, ErrorCode.NOT_FOUND_RESOURCE, e.getMessage());
+        }
         recordKeyword(request.getQuery());
 
         return buildResponse(bookResultData);
     }
 
     private BooksResponse buildResponse(BookResultData bookResultData) {
-        return new BooksResponse(bookResultData);
+        return BooksResponse.builder()
+                .books(bookResultData.getBooks())
+                .totalCount(bookResultData.getTotalCount())
+                .pageConunt(bookResultData.getPageCount())
+                .build();
     }
-
 
     /**
      * 검색결과 유무는 체크하지 않음

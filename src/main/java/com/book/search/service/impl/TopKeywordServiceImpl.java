@@ -23,7 +23,9 @@ public class TopKeywordServiceImpl implements TopKeywordService {
     @Override
     public TopListResponse retrieve() {
         try {
-            return new TopListResponse(historyComponent.loadKeywordData());
+            return TopListResponse.builder()
+                    .keywords(historyComponent.loadKeywordData())
+                    .build();
         } catch (NotFoundException e) {
             e.printStackTrace();
             throw new ErrorException(HttpStatus.NO_CONTENT, ErrorCode.NOT_FOUND_RESOURCE, "top keyword");

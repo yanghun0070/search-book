@@ -17,7 +17,7 @@ public class SignUpController {
     SignUpService signUpService;
 
     @PutMapping(Endpoints.ACCOUNT_SIGNUP)
-    public void signUp(@Validated @RequestBody SignUpRequest request) throws Exception {
+    public void signUp(@Validated @RequestBody SignUpRequest request) {
         log.debug("[SignUpController] request : {}", request);
         signUpService.run(request);
     }

@@ -4,6 +4,7 @@ import com.book.search.common.code.BookStoreCode;
 import com.book.search.common.data.BookResultData;
 import com.book.search.endpoint.model.request.SearchBookRequest;
 import com.book.search.exception.InternalException;
+import com.book.search.exception.biz.NotFoundException;
 import com.book.search.net.kakao.KakaoSearchBookClient;
 import com.book.search.net.naver.NaverSearchBookClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class BookComponent {
         this.naverSearchBookClient = naverSearchBookClient;
     }
 
-    public BookResultData loadBooks(SearchBookRequest request) {
+    public BookResultData loadBooks(SearchBookRequest request) throws NotFoundException {
         try {
             return kakaoSearchBookClient.
                     request(request.translate(BookStoreCode.KAKAO));
