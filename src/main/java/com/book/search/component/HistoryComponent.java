@@ -23,12 +23,12 @@ public class HistoryComponent {
     MemberComponent memberComponent;
 
     @Transactional
-    public History saveHistory(String keyword, long mbrId) throws Exception {
+    public History saveHistory(String keyword, long mbrId) {
         try {
             return historyRepository.
                     save(new History(keyword, memberComponent.loadMember(mbrId)));
         } catch (org.hibernate.exception.ConstraintViolationException e) {
-            throw e; //중복?
+            throw e;
         }
 
     }
