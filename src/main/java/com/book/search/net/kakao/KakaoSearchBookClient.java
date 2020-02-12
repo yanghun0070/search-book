@@ -1,6 +1,7 @@
 package com.book.search.net.kakao;
 
 import com.book.search.common.properties.KakaoProperties;
+import com.book.search.exception.biz.NotFoundException;
 import com.book.search.net.SearchClient;
 import com.book.search.net.data.StoreRequest;
 import com.book.search.net.kakao.model.KakaoBooksResponse;
@@ -41,9 +42,13 @@ public class KakaoSearchBookClient implements SearchClient<KakaoBooksResponse> {
     }
 
     @Override
-    public KakaoBooksResponse request(StoreRequest request) {
+    public KakaoBooksResponse request(StoreRequest request) throws NotFoundException {
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
-        return restTemplate.exchange(resolveUri(request), HttpMethod.GET, entity, KakaoBooksResponse.class).getBody();
+        KakaoBooksResponse response = restTemplate.exchange(resolveUri(request), HttpMethod.GET, entity, KakaoBooksResponse.class).getBody();
+        if (response.getBooks() == null || response.getBooks().size() == 0)
+            throw new NotFoundException();
+
+        return response;
     }
 
     private URI resolveUri(StoreRequest request) {

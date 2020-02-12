@@ -9,9 +9,9 @@
 ### API
 Method	| Path	| Description	| User authenticated	
 ------------- | ------------------------- | ------------- |:-------------:|
-GET	| /search/books/{keyType}	| 책 검색을 위한 API이다. 	|
-GET	| /search/histories	| 나의 검색 히스토리(키워드, 검색 일시)를 제공한다.	|
-GET	| /search/tops	| 사람들이 검색한 10개의 검색 키워드를 제공합니다. | 	
+GET	| /search/books/{keyType}	| 책 검색을 위한 API이다. 	| o
+GET	| /search/histories	| 나의 검색 히스토리(키워드, 검색 일시)를 제공한다.	| o
+GET	| /search/tops	| 사람들이 검색한 10개의 검색 키워드를 제공합니다. | o
 POST | /account/login	| 가입한 아이디/패스워드를 통해 로그인 서비스를 제공한다. 	| × 
 PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | × 
 
