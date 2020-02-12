@@ -3,13 +3,14 @@ package com.book.search.endpoint.model.request;
 import com.book.search.common.code.BookStoreCode;
 import com.book.search.common.code.KeyTypeCode;
 import com.book.search.common.code.SortCode;
+import com.book.search.common.data.StoreTranslate;
 import com.book.search.net.data.StoreRequest;
 import com.book.search.net.kakao.model.KakaoBookRequest;
 import com.book.search.net.naver.model.NaverBookRequest;
 import lombok.Data;
 
 @Data
-public class SearchBookRequest {
+public class SearchBookRequest implements StoreTranslate {
     private String query;
     private KeyTypeCode keyTypeCode;
     private SortCode sortCode;
@@ -24,6 +25,7 @@ public class SearchBookRequest {
         this.page = page;
     }
 
+    @Override
     public StoreRequest translate(BookStoreCode storeCode) {
         switch (storeCode) {
             case NAVER:

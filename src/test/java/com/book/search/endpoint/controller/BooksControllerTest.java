@@ -76,7 +76,7 @@ public class BooksControllerTest extends AbstractControllerTest {
 
         String token = obtainToken();
         String keyType = KeyTypeCode.PUBLISHER.getCode();
-        String query = "영판";
+        String query = "동아";
 
         mockMvc.perform(get(Endpoints.SEARCH_BOOK_ENDPOINT, keyType)
                 .header("Authorization", "Bearer " + token)
@@ -88,7 +88,6 @@ public class BooksControllerTest extends AbstractControllerTest {
 
     @Test
     public void test_search_query_is_null() throws Exception {
-
         String token = obtainToken();
         String keyType = KeyTypeCode.DEFAULT.getCode();
 

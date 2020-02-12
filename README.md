@@ -67,10 +67,9 @@ curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json
 ``` 
 
 #### 3. 책 검색
-책 검색 기능은 키워드를 통한 검색만 지원한다. 키워드는 values parameter를 통해 URL encode하여 전달한다.
+책 검색은 kakao, naver 이외에 다른 store도 추가가 가능하도록 chain 형태로 구성하였다. 
 
-로그인시 발급 받은 jwt token을 Authorization Bearer 형태로 전송 해야한다.
-token 검증은 signed key verify 를 통해 검증한다.
+로그인시 발급 받은 jwt token을 Authorization Bearer {token값} 형태로 전송 해야한다.
 
 책검색 API는 아래와 같다.
 ###### Path

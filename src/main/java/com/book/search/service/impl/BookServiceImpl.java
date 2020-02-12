@@ -5,6 +5,7 @@ import com.book.search.common.data.BookResultData;
 import com.book.search.common.data.UserData;
 import com.book.search.component.BookComponent;
 import com.book.search.component.HistoryComponent;
+import com.book.search.component.StoreBookComponent;
 import com.book.search.endpoint.model.request.SearchBookRequest;
 import com.book.search.endpoint.model.response.BooksResponse;
 import com.book.search.exception.biz.NotFoundException;
@@ -21,12 +22,16 @@ import org.springframework.stereotype.Service;
 public class BookServiceImpl implements BookService {
 
     private HistoryComponent historyComponent;
+    private StoreBookComponent storeBookComponent;
+
     private BookComponent bookComponent;
 
     @Autowired
     public BookServiceImpl(BookComponent bookComponent,
+                           StoreBookComponent storeBookComponent,
                            HistoryComponent historyComponent) {
         this.bookComponent = bookComponent;
+        this.storeBookComponent = storeBookComponent;
         this.historyComponent = historyComponent;
     }
 
@@ -34,11 +39,12 @@ public class BookServiceImpl implements BookService {
     public BooksResponse search(SearchBookRequest request) {
         BookResultData bookResultData;
         try {
-            bookResultData = bookComponent.loadBooks(request);
+            bookResultData = storeBookComponent.loadBooks(request);
         } catch (NotFoundException e) {
             log.error(e.getMessage());
             throw new ErrorException(HttpStatus.NO_CONTENT, ErrorCode.NOT_FOUND_RESOURCE, e.getMessage());
         }
+
         recordKeyword(request.getQuery());
 
         return buildResponse(bookResultData);
