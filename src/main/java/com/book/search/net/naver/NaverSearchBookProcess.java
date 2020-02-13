@@ -59,15 +59,10 @@ public class NaverSearchBookProcess extends SearchProcess {
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
         URI uri = resolveUri(value.translate(BookStoreCode.NAVER));
 
-        NaverBooksResponse response = restTemplate.exchange(uri, HttpMethod.GET, entity, NaverBooksResponse.class).getBody();
-        log.debug("$######################");
-        log.debug("$######################");
-        log.debug("naver response:" + response);
-        log.debug("naver getBook:" + response.getBooks());
-        log.debug("naver size:" + response.getBooks().size());
-        log.debug("$######################");
-        log.debug("$######################");
-        if (response.getBooks() == null || response.getBooks().size() == 0)
+        NaverBooksResponse response = restTemplate.
+                exchange(uri, HttpMethod.GET, entity, NaverBooksResponse.class).
+                getBody();
+        if (response.getBooks().size() == 0)
             throw new NotFoundException("no search result to naver");
 
         return response;

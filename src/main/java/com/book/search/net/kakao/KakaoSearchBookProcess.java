@@ -58,16 +58,11 @@ public class KakaoSearchBookProcess extends SearchProcess {
         HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
         URI uri = resolveUri(value.translate(BookStoreCode.KAKAO));
 
-        KakaoBooksResponse response = restTemplate.exchange(uri, HttpMethod.GET, entity, KakaoBooksResponse.class).getBody();
-        log.debug("$######################");
-        log.debug("$######################");
-        log.debug("kakao response:" + response);
-        log.debug("kakao getBook:" + response.getBooks());
-        log.debug("kakao size:" + response.getBooks().size());
-        log.debug("$######################");
-        log.debug("$######################");
+        KakaoBooksResponse response = restTemplate
+                .exchange(uri, HttpMethod.GET, entity, KakaoBooksResponse.class)
+                .getBody();
 
-        if (response.getBooks() == null || response.getBooks().size() == 0)
+        if (response.getBooks().size() == 0)
             throw new NotFoundException("no search result to kakao");
 
         return response;
