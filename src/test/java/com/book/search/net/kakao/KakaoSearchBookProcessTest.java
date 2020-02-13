@@ -1,20 +1,21 @@
 package com.book.search.net.kakao;
 
 import com.book.search.AbstractSearchTest;
-import com.book.search.common.data.BookResultData;
 import com.book.search.common.code.KeyTypeCode;
 import com.book.search.common.code.SortCode;
+import com.book.search.common.data.BookResultData;
+import com.book.search.common.data.StoreTranslate;
+import com.book.search.endpoint.model.request.SearchBookRequest;
 import com.book.search.exception.BusinessException;
-import com.book.search.net.kakao.model.KakaoBookRequest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertNotNull;
 
-public class KakaoSearchBookClientTest extends AbstractSearchTest {
+public class KakaoSearchBookProcessTest extends AbstractSearchTest {
 
     @Autowired
-    KakaoSearchBookClient kakaoSearchBookClient;
+    KakaoSearchBookProcess kakaoSearchBookProcess;
 
     /**
      * private String query;    //검색을 원하는 질의어	O	String
@@ -28,10 +29,10 @@ public class KakaoSearchBookClientTest extends AbstractSearchTest {
     @Test
     public void test_request() throws BusinessException {
 
-        KakaoBookRequest kakaoBookRequest = new KakaoBookRequest("엄마", SortCode.LASTEST, 1, 5, KeyTypeCode.DEFAULT);
+        StoreTranslate request = new SearchBookRequest("엄마", KeyTypeCode.DEFAULT, SortCode.LASTEST.getCode(), 1, 5);
         BookResultData response =
-                kakaoSearchBookClient.
-                        request(kakaoBookRequest);
+                kakaoSearchBookProcess.
+                        doHandling(request);
 
         System.out.println("responseBody : " + response);
 

@@ -9,11 +9,13 @@ import com.book.search.exception.BusinessException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.junit.Assert.assertNotNull;
 
-public class BookComponentTest extends AbstractSearchTest {
+
+public class StoreBookComponentTest extends AbstractSearchTest {
 
     @Autowired
-    BookComponent bookComponent;
+    StoreBookComponent bookComponent;
 
     @Test
     public void loadBooks() throws BusinessException {
@@ -26,8 +28,6 @@ public class BookComponentTest extends AbstractSearchTest {
                         3,
                         1));
 
-        System.out.println("resultData:"+resultData);
-
-
+        assertNotNull(resultData);
     }
 }

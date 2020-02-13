@@ -23,12 +23,11 @@ public class HistoryComponentTest extends AbstractSearchTest {
     HistoryComponent historyComponent;
 
     @Test
-    public void test_saveHistory() throws Exception {
+    public void test_saveHistory() {
         String keyword = "아빠";
         History history = historyComponent.saveHistory(keyword, 1L);
         assertEquals(history.getKeyword(), keyword);
     }
-
 
     @Test
     public void test_loadHistory() throws NotFoundException {
@@ -41,11 +40,19 @@ public class HistoryComponentTest extends AbstractSearchTest {
         assertNotNull(histories);
     }
 
+
+    @Test(expected = NotFoundException.class)
+    public void test_loadHistory_not_foud() throws NotFoundException {
+        Pageable pageable = PageRequest.of(1, 2);
+        Specification<History> specification = HistorySpecification.eqMbrId(800000);
+        historyComponent.loadHistory(specification, pageable);
+    }
+
     @Test
     public void loadKeywordData() throws NotFoundException {
         List<KeywordData> list = historyComponent.loadKeywordData();
 
-        for(int i=0; i<list.size(); i++)
+        for (int i = 0; i < list.size(); i++)
             System.out.println("keyword:" + list.get(i).getKeyword() + " cnt : " + list.get(i).getCount());
 
         assertNotNull(list);

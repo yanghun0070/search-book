@@ -4,17 +4,18 @@ import com.book.search.AbstractSearchTest;
 import com.book.search.common.data.BookResultData;
 import com.book.search.common.code.KeyTypeCode;
 import com.book.search.common.code.SortCode;
+import com.book.search.common.data.StoreTranslate;
+import com.book.search.endpoint.model.request.SearchBookRequest;
 import com.book.search.exception.BusinessException;
-import com.book.search.net.naver.model.NaverBookRequest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertNotNull;
 
-public class NaverSearchBookClientTest extends AbstractSearchTest {
+public class NaverSearchBookProcessTest extends AbstractSearchTest {
 
     @Autowired
-    NaverSearchBookClient naverSearchBookClient;
+    NaverSearchBookProcess naverSearchBookProcess;
 
     /**
      * private String query;    //검색을 원하는 질의어	O	String
@@ -28,10 +29,9 @@ public class NaverSearchBookClientTest extends AbstractSearchTest {
     @Test
     public void test_request() throws BusinessException {
 
-        NaverBookRequest request = new NaverBookRequest("엄마", SortCode.LASTEST, 1, 5, KeyTypeCode.DEFAULT);
+        StoreTranslate request = new SearchBookRequest("엄마", KeyTypeCode.DEFAULT, SortCode.LASTEST.getCode(), 1, 5);
         BookResultData response =
-                naverSearchBookClient.
-                        request(request);
+                naverSearchBookProcess.doHandling(request);
 
         System.out.println("responseBody : " + response);
 
