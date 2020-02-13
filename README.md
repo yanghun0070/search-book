@@ -6,6 +6,16 @@
 ## 서비스
 서비스는 회원가입/로그인, 책 검색, 히스토리, 인기 키워드로 구성된다. 
 
+### 개발 환경
+　 - Java8 feature 사용
+
+　 - Spring Boot 2.2.4.RELEASE
+
+　 - Spring Security(로그인)
+
+　 - nimbus-jose-jwt(로그인 인증 토컨 발급 및 검증)
+
+
 ### API
 Method	| Path	| Description	| User authenticated	
 ------------- | ------------------------- | ------------- |:-------------:|
@@ -14,6 +24,17 @@ GET	| /search/histories	| 나의 검색 히스토리(키워드, 검색 일시)�
 GET	| /search/tops	| 사람들이 검색한 10개의 검색 키워드를 제공합니다. | o
 POST | /account/login	| 가입한 아이디/패스워드를 통해 로그인 서비스를 제공한다. 	| × 
 PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | × 
+
+#### 응답 메시지
+HttpStatus code 200 성공을 제외한 응답은 아래 에러 메시지 구조와 같이 code, message 필드 형태를 가진다.
+``` 
+{
+  "code" : "4004",
+  "message" : "The user(qmdfjskldajfdfsdfsd) is not found."
+}
+```   
+
+요청에 대한 성공시에는 HttpStatus code 200이며, 
 
 ### 테스트 
 아래 절차대로 소스를 다운 및 컴파일 하고 
@@ -81,7 +102,7 @@ curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json
 
 책 검색 예제는 아래와 같이 수행한다. 
 ``` 
-curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogImU3N0c3cDhZZXkzWGhOdXlFQ3NJdDlTaktueVBwcVZGZEN4UElpM3VCNDA9IiwKICAiZXhwIiA6IDE1ODE2ODg5MjQsCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.OoG2RW9yNVaHsHLxLfoaISv-JjUESqyAhLt60dq4pjPnAyY2Qws9GbaOZOlooOJBjvRzGHlsCLVVbQZ_Ni0xbdF-7FoyH2Fkp_WKPy7GOD08JgC9FDDasGT9QI3Ryo65btAV-C14eJly9ct_W2GoOw7r0qnWhBxdrlotFqmNqGVPOi4ZyVRtE07FUeybJ2A6EUcnmQ1oS-Y3XMzapwunTgv6IwX21YgXE-zl7Iw1fvYU4hTmxiIUrAuVXFAEpZb3kQ8mV_NrCYBYRgSBBaB_I0MlJ6XOFZ4rvW7O2szyWm2J5xm1UPhsOCMo1DrJ51pGjV-I8OJuDnHpKCOiM--q6A" -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/search/books/tilte?query=test&page=1&size=10 -v
+curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogImU3N0c3cDhZZXkzWGhOdXlFQ3NJdDlTaktueVBwcVZGZEN4UElpM3VCNDA9IiwKICAiZXhwIiA6IDE1ODE2ODg5MjQsCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.OoG2RW9yNVaHsHLxLfoaISv-JjUESqyAhLt60dq4pjPnAyY2Qws9GbaOZOlooOJBjvRzGHlsCLVVbQZ_Ni0xbdF-7FoyH2Fkp_WKPy7GOD08JgC9FDDasGT9QI3Ryo65btAV-C14eJly9ct_W2GoOw7r0qnWhBxdrlotFqmNqGVPOi4ZyVRtE07FUeybJ2A6EUcnmQ1oS-Y3XMzapwunTgv6IwX21YgXE-zl7Iw1fvYU4hTmxiIUrAuVXFAEpZb3kQ8mV_NrCYBYRgSBBaB_I0MlJ6XOFZ4rvW7O2szyWm2J5xm1UPhsOCMo1DrJ51pGjV-I8OJuDnHpKCOiM--q6A" -H "Accept: application/json" -H "Content-Type: application/json" "http://localhost:8080/search/books/tilte?query=test&page=1&size=2" -v
 
 ```
 
@@ -132,7 +153,7 @@ application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 
 인증세션이 존재하여야하며 책 검색과 동일하게 로그인시 발급 받은 jwt token을 Authorization Bearer 형태로 전송 해야한다.
 
 ``` 
-curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogIk9MdTY4REVocmF6RlNqZlJtU20zU3J4S0pJMXV3UXN0K3psOGpVUkZySDg9IiwKICAiZXhwIiA6IDE1ODE2ODUxMDksCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.BjDspJAJc3jsPhfYSw2Xk4EcNUUxbuswjoNpcE11g_vt2oegdg8ZfS0XECJ4GZ9uvF-RUH7D27eAJMe7oxvHQn10b6IsUxS4SRKNGa2DmAcFaR7zSEk9dmHWqkzYKxOOhkZB92CTiwm45AIQJzWEHB5lnI0AHxTDtWGbK1b557IrhmqDoDD8Tx0lnHwAvU3o2xi4KhOmPH3mGDyTaRjqkpUc6-uNphPMgh7M8ojCT_MgMjj0ksRWdhGmTHTq1g_98ObWsofrhTvfkZKCkxFJH4xEMj7I-KebI3Clyyd9zW073k0-wCy03etcnk6pn41GyrgXJvD057yRHcFCHDIurA"  http://localhost:8080/search/histories?size=11&page=1
+curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogIk9MdTY4REVocmF6RlNqZlJtU20zU3J4S0pJMXV3UXN0K3psOGpVUkZySDg9IiwKICAiZXhwIiA6IDE1ODE2ODUxMDksCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.BjDspJAJc3jsPhfYSw2Xk4EcNUUxbuswjoNpcE11g_vt2oegdg8ZfS0XECJ4GZ9uvF-RUH7D27eAJMe7oxvHQn10b6IsUxS4SRKNGa2DmAcFaR7zSEk9dmHWqkzYKxOOhkZB92CTiwm45AIQJzWEHB5lnI0AHxTDtWGbK1b557IrhmqDoDD8Tx0lnHwAvU3o2xi4KhOmPH3mGDyTaRjqkpUc6-uNphPMgh7M8ojCT_MgMjj0ksRWdhGmTHTq1g_98ObWsofrhTvfkZKCkxFJH4xEMj7I-KebI3Clyyd9zW073k0-wCy03etcnk6pn41GyrgXJvD057yRHcFCHDIurA"  "http://localhost:8080/search/histories?size=3&page=1"
 
 ```
 응답 메시지는 keyword와 date로 구성된다.
