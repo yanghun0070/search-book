@@ -56,10 +56,14 @@ public class SearchBookExceptionHandler {
         return getResponseEntity(HttpStatus.BAD_REQUEST, ErrorCode.ALREADY_EXIST, "resource");
     }
 
-
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ErrorResponse> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException ex) {
         return getResponseEntity(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_REQUEST_INFO, ex.getParameterName());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> illegalArgumentExceptionHandler(IllegalArgumentException ex) {
+        return getResponseEntity(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_REQUEST_INFO, ex.getMessage());
     }
 
     @ExceptionHandler(InternalException.class)
