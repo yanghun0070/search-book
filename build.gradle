@@ -31,6 +31,19 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 }
 
+ext['springCloudVersion'] = 'Greenwich.SR4'
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+}
+
 test {
     ignoreFailures = true
 }

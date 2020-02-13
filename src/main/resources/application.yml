@@ -27,3 +27,31 @@ book:
     uri: https://openapi.naver.com/v1/search/book.json
     client-id: ZO9_hDNEMyndUDZ39d36
     client-secret: 7FuhxdhoGX
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 100
+      maximumSize: 500
+      keepAliveTimeMinutes: 1
+      allowMaximumSizeToDivergeFromCoreSize: true
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
+      circuitBreaker:
+        requestVolumeThreshold: 2
+        errorThresholdPercentage: 50
+        enabled: true
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      feignName:
+        connectTimeout: 2000
+        readTimeout: 3000
+        loggerLevel: full
