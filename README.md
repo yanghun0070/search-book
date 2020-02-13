@@ -7,7 +7,8 @@
 
 ### 구축 환경
 　 - Java8  
-　 - Spring Boot 2.2.4.RELEASE  
+　 - Spring Boot 2.2.4.RELEASE
+　 - Spring cloud openfeign, hystix(circuit breaker 용도)  
 　 - Spring Security(로그인)  
 　 - nimbus-jose-jwt(로그인 인증 토컨 발급 및 검증)  
 　 - H2 DB  
@@ -103,7 +104,9 @@ curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json
 ``` 
 
 #### 3. 책 검색
->책 검색은 kakao, naver 이외에 다른 store도 추가가 가능하도록 chain 형태로 구성하였다. 
+>책 검색은 kakao > naver 순으로 검색이 수행되며, 다른 store가 추가될 수있음을 고려하여 chain형태로 구현되었다.
+>또한 대용량 트래픽 처리를 위해 Circuit Breaker기능을 추가 하였다. 10번 실패가 발생하면 circuit이 open되도록 설정되어있다.       
+>naver 책 검색은 kakao 책 검색 장애 발생이나 검색 결과가 없을때 수행됨으로 application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 가능하다.      
 >__로그인시 발급 받은 jwt token을 Authorization Bearer {token값} 형태로 전송 해야한다.__  
 >책검색 API는 아래와 같다.  
 ###### Path
@@ -119,8 +122,6 @@ curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogI
 
 ```
 
->책 검색은 kakao > naver 순으로 검색이 수행되며, store가 추가될 수있음을 고려하여 chain형태로 구현되었다.   
->naver 책 검색은 kakao 책 검색 장애 발생이나 검색 결과가 없을때 수행됨으로 application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 가능하다.  
 >응답 메시지는 구조는 아래와 같다.
 ``` 
  {
