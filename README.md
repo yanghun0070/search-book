@@ -66,9 +66,7 @@ PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | ×
 - name, login_id, password로 구성된다.   
 >테스트는 아래 curl 예제를 통해 가능하다.
 ``` 
-
 curl -X PUT -d '{ "name" : "이동진", "login_id" : "joinnewuser", "password" : "1234test!" }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/account/sign-up -v
-
 ``` 
 
 >성공인 경우 http status code 200으로 응답되며, bod 메시지는 따로 존재하지 않는다.  
@@ -89,9 +87,7 @@ curl -X PUT -d '{ "name" : "이동진", "login_id" : "joinnewuser", "password" :
 
 >테스트는 아래 curl을 통해 가능하다.
 ``` 
-
 curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json" -d '{"username" : "testuser","password" : "test1234!"}' http://localhost:8080/account/login
-
 ```
 
 >응답메시지 구조는 아래와 같다
@@ -108,29 +104,23 @@ curl -X POST -v -H "Accept: application/json" -H "Content-Type: application/json
 
 #### 3. 책 검색
 >책 검색은 kakao, naver 이외에 다른 store도 추가가 가능하도록 chain 형태로 구성하였다. 
-
->__로그인시 발급 받은 jwt token을 Authorization Bearer {token값} 형태로 전송 해야한다.__
-
->책검색 API는 아래와 같다.
+>__로그인시 발급 받은 jwt token을 Authorization Bearer {token값} 형태로 전송 해야한다.__  
+>책검색 API는 아래와 같다.  
 ###### Path
  - /search/books/{keyType}
 ###### keyType
-- title, isbn, publisher, person, keyword로 구성된다.
+- title, isbn, publisher, person, keyword로 구성되며, 검색 대상 항목을 의미한다. keyword가 Store(카카오,네이버) 검색의 default(null) 이다.
 ###### query parameter 
 - query,  size, page, sort 구성된다. sort는 accuracy, latest로 구성되며, size와 page는 1 부터 시작된다.  
 
 >책 검색 예제는 아래와 같이 수행한다. 
 ``` 
-
 curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogImU3N0c3cDhZZXkzWGhOdXlFQ3NJdDlTaktueVBwcVZGZEN4UElpM3VCNDA9IiwKICAiZXhwIiA6IDE1ODE2ODg5MjQsCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.OoG2RW9yNVaHsHLxLfoaISv-JjUESqyAhLt60dq4pjPnAyY2Qws9GbaOZOlooOJBjvRzGHlsCLVVbQZ_Ni0xbdF-7FoyH2Fkp_WKPy7GOD08JgC9FDDasGT9QI3Ryo65btAV-C14eJly9ct_W2GoOw7r0qnWhBxdrlotFqmNqGVPOi4ZyVRtE07FUeybJ2A6EUcnmQ1oS-Y3XMzapwunTgv6IwX21YgXE-zl7Iw1fvYU4hTmxiIUrAuVXFAEpZb3kQ8mV_NrCYBYRgSBBaB_I0MlJ6XOFZ4rvW7O2szyWm2J5xm1UPhsOCMo1DrJ51pGjV-I8OJuDnHpKCOiM--q6A" -H "Accept: application/json" -H "Content-Type: application/json" "http://localhost:8080/search/books/tilte?query=test&page=1&size=2" -v
-
 
 ```
 
->책 검색은 kakao > naver 순으로 검색이 수행되며, store가 추가될 수있음을 고려하여 chain형태로 구현되었다.  
-> 
->naver 책 검색은 kakao 책 검색 장애 발생이나 검색 결과가 없을때 수행됨으로 application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 가능하다.    
-
+>책 검색은 kakao > naver 순으로 검색이 수행되며, store가 추가될 수있음을 고려하여 chain형태로 구현되었다.   
+>naver 책 검색은 kakao 책 검색 장애 발생이나 검색 결과가 없을때 수행됨으로 application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 가능하다.  
 >응답 메시지는 구조는 아래와 같다.
 ``` 
  {
