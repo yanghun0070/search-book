@@ -7,7 +7,7 @@
 
 ### 구축 환경
 　 - Java8  
-　 - Spring Boot 2.2.4.RELEASE
+　 - Spring Boot 2.2.4.RELEASE  
 　 - Spring cloud openfeign, hystix(circuit breaker 용도)  
 　 - Spring Security(로그인)  
 　 - nimbus-jose-jwt(로그인 인증 토컨 발급 및 검증)  
