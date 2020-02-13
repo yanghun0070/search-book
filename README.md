@@ -60,11 +60,11 @@ PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | ×
 
 #### 1. 회원가입
 >회원정보는 이름, 아이디, 비밀번호로 구성된다.  
->테스트는 아래 curl을 통해 가능하다.
 ###### Path
  - /account/sign-up
 ###### body element
 - name, login_id, password로 구성된다.   
+>테스트는 아래 curl을 통해 가능하다.
 ``` 
 
 curl -X PUT -d '{ "name" : "이동진", "login_id" : "joinnewuser", "password" : "1234test!" }' -H "Accept: application/json" -H "Content-Type: application/json" http://localhost:8080/account/sign-up -v
@@ -127,8 +127,9 @@ curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogI
 
 ```
 
->naver 책 검색의 경우 kakao 책 검색이 장애가 발생하였을때 수행한다.
-application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 가능하다.
+>책 검색은 kakao > naver 순으로 검색이 수행되며, store가 추가될 수있음을 고려하여 chain형태로 구현되었다.  
+> 
+>naver 책 검색은 kakao 책 검색 장애 발생이나 검색 결과가 없을때 수행됨으로 application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 가능하다.    
 
 >응답 메시지는 구조는 아래와 같다.
 ``` 
