@@ -32,7 +32,8 @@ public class KakaoSearchBookClientFallback implements FallbackFactory<KakaoSearc
         return new KakaoSearchBookClient() {
             @Override
             public KakaoBooksResponse request(String authorization, String query, int page, int size, String sort, String target) {
-                throw new InternalException("Member service error");
+                log.error("Kakao service error : {}", cause.getStackTrace());
+                throw new InternalException("Kakao service error");
             }
         };
     }

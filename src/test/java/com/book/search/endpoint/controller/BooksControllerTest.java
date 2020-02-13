@@ -3,10 +3,8 @@ package com.book.search.endpoint.controller;
 import com.book.search.AbstractControllerTest;
 import com.book.search.common.code.KeyTypeCode;
 import com.book.search.common.properties.KakaoProperties;
-import com.book.search.common.properties.NaverProperties;
 import com.book.search.endpoint.Endpoints;
 import com.book.search.endpoint.model.request.LoginRequest;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
@@ -102,10 +100,13 @@ public class BooksControllerTest extends AbstractControllerTest {
     @Autowired
     KakaoProperties kakaoProperties;
 
+    /**
+     * 영판 검색결과 카카오 없음
+     * @throws Exception
+     */
     @Test
     public void test_search_naver() throws Exception {
         String token = obtainToken();
-        kakaoProperties.setUri("http://kakao.com");
 
         String keyType = KeyTypeCode.PUBLISHER.getCode();
         String query = "영판";
@@ -118,29 +119,6 @@ public class BooksControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
-
-
-    @Autowired
-    NaverProperties naverProperties;
-
-    @Test
-    public void test_search_naver_error() throws Exception {
-        String token = obtainToken();
-        kakaoProperties.setUri("http://kakao.com");
-        naverProperties.setUri("http://kakao.com");
-
-        String keyType = KeyTypeCode.PUBLISHER.getCode();
-        String query = "영판";
-
-        mockMvc.perform(get(Endpoints.SEARCH_BOOK_ENDPOINT, keyType)
-                .header("Authorization", "Bearer " + token)
-                .param("query", query)
-                .param("page", "2")
-                .param("size", "4"))
-                .andExpect(status().is5xxServerError())
-                .andDo(print());
-    }
-
 
     @Test
     public void test_search_no_session_error() throws Exception {

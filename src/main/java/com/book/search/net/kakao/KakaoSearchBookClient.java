@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 카카오 책 검색 수행 클래스
  */
 @FeignClient(value = "kakao-store",
-            url = "https://dapi.kakao.com",
+        url = "${book.kakao.uri}",
         configuration = {BookFeignClientConfiguration.class},
         fallbackFactory = KakaoSearchBookClientFallback.class)
 public interface KakaoSearchBookClient {

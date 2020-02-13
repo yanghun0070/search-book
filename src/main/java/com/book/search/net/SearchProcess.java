@@ -15,9 +15,6 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public abstract class SearchProcess implements ChainHandler<StoreTranslate, BookResultData> {
 
-    protected RestTemplate restTemplate;
-    protected HttpHeaders httpHeaders;
-
     private ChainHandler<StoreTranslate, BookResultData> next;
 
     @Override

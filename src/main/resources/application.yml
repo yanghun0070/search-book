@@ -20,11 +20,11 @@ book:
   auth:
     key-pair-path: rsa_key/book-rsa-key.pem
   kakao:
-    uri: https://dapi.kakao.com/v3/search/book
+    uri: https://dapi.kakao.com
     api-key: 6f6dd19b8528c6f2fcc55c7411111cf5
 
   naver:
-    uri: https://openapi.naver.com/v1/search/book.json
+    uri: https://openapi.naver.com
     client-id: ZO9_hDNEMyndUDZ39d36
     client-secret: 7FuhxdhoGX
 
@@ -42,7 +42,7 @@ hystrix:
           thread:
             timeoutInMilliseconds: 15000
       circuitBreaker:
-        requestVolumeThreshold: 2
+        requestVolumeThreshold: 10
         errorThresholdPercentage: 50
         enabled: true
 

@@ -32,7 +32,7 @@ public class NaverSearchBookClientFallback implements FallbackFactory<NaverSearc
         return new NaverSearchBookClient() {
             @Override
             public NaverBooksResponse request(String clientId, String secret, String query, int page, int size, String sort, String target) {
-                throw new InternalException("Member service error");
+                throw new InternalException("Naver service error");
             }
 
         };

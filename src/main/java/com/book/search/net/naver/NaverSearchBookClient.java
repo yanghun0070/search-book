@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 카카오 책 검색 수행 클래스
  */
 @FeignClient(value = "naver-store",
-        url = "https://openapi.naver.com",
+        url = "${book.naver.uri}",
         configuration = {BookFeignClientConfiguration.class},
         fallbackFactory = NaverSearchBookClientFallback.class)
 public interface NaverSearchBookClient {
