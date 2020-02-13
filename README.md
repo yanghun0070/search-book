@@ -202,13 +202,13 @@ curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H
 }
 ``` 
 ####  5. 인기 키워드 목록
->인기 키워드 목록은 키워드 검색 횟수 역순으로 제공된다. 
+>인기 키워드 목록은 키워드 검색 횟수 역순으로 제공된다.  
 >인증세션이 존재하여야하며 책 검색과 동일하게 로그인시 발급 받은 jwt token을 Authorization Bearer 형태로 전송 해야한다.  
 
 ###### Path
  - /search/tops  
  
- 요청메시지는 아래와 같다.
+>요청메시지는 아래와 같다.
 ``` 
 curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.ewogICJqdGkiIDogIk9MdTY4REVocmF6RlNqZlJtU20zU3J4S0pJMXV3UXN0K3psOGpVUkZySDg9IiwKICAiZXhwIiA6IDE1ODE2ODUxMDksCiAgIm1lbWJlcklkIiA6IDEsCiAgInVzZXJuYW1lIiA6ICJ0ZXN0dXNlciIsCiAgImdyYW50ZWRBdXRob3JpdGllcyIgOiBbICJST0xFX01FTUJFUiIgXSwKICAiYWNjb3VudE5vbkxvY2tlZCIgOiB0cnVlLAogICJjcmVkZW50aWFsc05vbkV4cGlyZWQiIDogdHJ1ZSwKICAiZW5hYmxlZCIgOiB0cnVlLAogICJhY2NvdW50Tm9uRXhwaXJlZCIgOiB0cnVlLAogICJleHBpcmVkIiA6IGZhbHNlCn0.BjDspJAJc3jsPhfYSw2Xk4EcNUUxbuswjoNpcE11g_vt2oegdg8ZfS0XECJ4GZ9uvF-RUH7D27eAJMe7oxvHQn10b6IsUxS4SRKNGa2DmAcFaR7zSEk9dmHWqkzYKxOOhkZB92CTiwm45AIQJzWEHB5lnI0AHxTDtWGbK1b557IrhmqDoDD8Tx0lnHwAvU3o2xi4KhOmPH3mGDyTaRjqkpUc6-uNphPMgh7M8ojCT_MgMjj0ksRWdhGmTHTq1g_98ObWsofrhTvfkZKCkxFJH4xEMj7I-KebI3Clyyd9zW073k0-wCy03etcnk6pn41GyrgXJvD057yRHcFCHDIurA"  http://localhost:8080/search/tops
 

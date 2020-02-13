@@ -29,13 +29,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
     </appender>
-
-    <!--&lt;!&ndash; TRACE < DEBUG < INFO < WARN < ERROR < OFF &ndash;&gt;-->
-    <!--<logger name="org.springframework" level="INFO"/>-->
-    <!--<logger name="org.apache.http" level="INFO"/>-->
-    <!--<logger name="org.springframework.jndi" level="INFO"/>-->
-
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>
