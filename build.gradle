@@ -20,7 +20,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.h2database:h2:1.4.199'
 
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
 

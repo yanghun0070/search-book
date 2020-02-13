@@ -18,7 +18,7 @@ public class WebSecurityConfigTest extends AbstractControllerTest {
         this.mockMvc.perform(get("/search/qmfkqmfk")
                 .contentType(MediaType.APPLICATION_JSON)
         )
-                .andExpect(status().isFound())
+                .andExpect(status().isUnauthorized())
                 .andDo(print());
     }
 

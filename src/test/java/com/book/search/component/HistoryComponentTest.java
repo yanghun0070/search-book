@@ -26,6 +26,7 @@ public class HistoryComponentTest extends AbstractSearchTest {
     public void test_saveHistory() {
         String keyword = "아빠";
         History history = historyComponent.saveHistory(keyword, 1L);
+
         assertEquals(history.getKeyword(), keyword);
     }
 
