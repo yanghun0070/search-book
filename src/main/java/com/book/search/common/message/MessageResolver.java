@@ -8,6 +8,9 @@ import org.springframework.context.NoSuchMessageException;
 
 import java.util.Locale;
 
+/**
+ * 에러코드에 매핑되는 resource message 를 제공하는 클래스이다.
+ */
 @Slf4j
 public class MessageResolver {
 

@@ -21,6 +21,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.Arrays;
 
+/**
+ * 네이버 책 검색 수행 클래스
+ */
 @Slf4j
 @Component
 public class NaverSearchBookProcess extends SearchProcess {

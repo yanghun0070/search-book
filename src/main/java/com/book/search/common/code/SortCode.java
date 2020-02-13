@@ -5,8 +5,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * kakao를 기본으로 한다.
- * API도 카카오와 동일하게 간다.
+ * 책 검색 sort code를 정의한다.
+ * 카카오와 naver의 코드를 매핑한다.
+ *
  */
 public enum SortCode {
     ACCURACY("accuracy", "accuracy", "sim"), //default

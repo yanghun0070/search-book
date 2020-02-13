@@ -1,6 +1,5 @@
 package com.book.search.common.data;
 
-import com.book.search.common.data.entity.JwtData;
 import com.book.search.common.data.entity.Member;
 import com.book.search.common.properties.SearchBookConstants;
 import com.book.search.common.util.CipherUtils;
@@ -16,6 +15,10 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 인증 세션 데이터를 정의한 클래스이다.
+ * JWT기본 구조와 확장 데이터 클래임으로 구성된다.
+ */
 @NoArgsConstructor
 @Data
 public class UserData implements UserDetails, JwtData {

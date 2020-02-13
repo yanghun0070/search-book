@@ -14,6 +14,10 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * 테이블의 공통 필드로써, 생성일 및 생성자로 구성된다.
+ * 생성자는 로그인 사용자의 username이 입력된다.
+ */
 @Data
 @MappedSuperclass
 @EntityListeners(value = {AuditingEntityListener.class})

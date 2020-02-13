@@ -11,6 +11,9 @@ import org.springframework.data.domain.Page;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 검색 내역 응답 데이터 정의
+ */
 @Data
 public class HistoryResponse {
 

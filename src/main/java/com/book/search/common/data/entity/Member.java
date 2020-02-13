@@ -10,6 +10,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 회원정보를 관리하는 테이블를 정의한 entity 클래스이다.
+ * 패스워드는 단방향 암호화되어 관리된다.
+ */
 @Getter
 @Setter
 @ToString(exclude = "history")

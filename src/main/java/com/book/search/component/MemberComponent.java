@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 회원정보를 control하는 클래스이다.
+ */
 @Slf4j
 @Component
 public class MemberComponent {

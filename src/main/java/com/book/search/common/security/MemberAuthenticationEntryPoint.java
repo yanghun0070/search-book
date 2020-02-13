@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * session 검증 실패시 응답 정의하는 클래스이다.
+ */
 @Slf4j
 @Component
 public class MemberAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {

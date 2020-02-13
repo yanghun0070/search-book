@@ -1,5 +1,8 @@
 package com.book.search.common.code;
 
+/**
+ * response 에러 코드를 정의한다.
+ */
 public enum ErrorCode {
 
     BAD_REQUEST("4000"), // Invalid request({0})

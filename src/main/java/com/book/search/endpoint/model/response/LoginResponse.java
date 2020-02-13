@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Collection;
 
+/**
+ * 로그인 결과 데이터 정의
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

@@ -2,6 +2,10 @@ package com.book.search.common.properties;
 
 import java.util.Locale;
 
+/**
+ * Application constants를 정의한 ㅋ클래스이다.
+ */
+
 public class SearchBookConstants {
 
     public static final Locale DEFAULT_LOCALE = new Locale("en", "US");

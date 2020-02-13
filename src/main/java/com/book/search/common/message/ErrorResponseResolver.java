@@ -4,6 +4,10 @@ import com.book.search.common.code.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * 에러코드에 매핑되는 resource message 을 통해 ErrorResponse 객체를 새생성하는 클래이다.
+ *
+ */
 @Component
 public class ErrorResponseResolver {
 

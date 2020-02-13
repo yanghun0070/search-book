@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 
+/**
+ * 책 검색 기능을 처리하는 클래스이다.
+ */
 @Slf4j
 @Component
 public class StoreBookComponent {

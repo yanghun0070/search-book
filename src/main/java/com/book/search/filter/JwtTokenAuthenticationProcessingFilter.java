@@ -1,5 +1,6 @@
 package com.book.search.filter;
 
+import com.book.search.common.data.auditor.AuditHelper;
 import com.book.search.common.security.JwtTokenExtractor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 세션 체크 및 threadlocal 데이터 처리
+ */
 @Slf4j
 public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -33,12 +37,15 @@ public class JwtTokenAuthenticationProcessingFilter extends AbstractAuthenticati
                                             Authentication authResult) throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authResult);
         chain.doFilter(request, response);
+        SecurityContextHolder.clearContext();
+        AuditHelper.clear();
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-                                              AuthenticationException failed) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed("+failed.getMessage()+")");
+                                              AuthenticationException failed) throws IOException {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed(" + failed.getMessage() + ")");
         SecurityContextHolder.clearContext();
+        AuditHelper.clear();
     }
 }

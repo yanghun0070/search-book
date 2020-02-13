@@ -18,18 +18,18 @@ import java.io.InputStreamReader;
 import java.security.KeyPair;
 import java.security.Security;
 
+/**
+ * Keypair load를 위한 클래스
+ */
 @Slf4j
 @Component
 public class CipherKeyManager {
 
     private KeyPair keyPair;
-    private ValueByteCoder byteCoder;
 
     @Autowired
-    public CipherKeyManager(BookProperties bookProperties,
-                            ValueByteCoder byteCoder) {
+    public CipherKeyManager(BookProperties bookProperties){
         loadKeyPair(bookProperties.getKeyPairPath());
-        this.byteCoder = byteCoder;
     }
 
     public KeyPair getServerKeyPair() {
@@ -43,11 +43,10 @@ public class CipherKeyManager {
             final Object privateKeyPemObject = pemParser.readObject();
             final JcaPEMKeyConverter converter = new JcaPEMKeyConverter().setProvider(new BouncyCastleProvider());
 
-            log.debug("privateKeyPemObject  : {}", privateKeyPemObject);
             if (privateKeyPemObject instanceof PEMEncryptedKeyPair) {
                 final PEMEncryptedKeyPair ckp = (PEMEncryptedKeyPair) privateKeyPemObject;
                 final PEMDecryptorProvider decProv = new JcePEMDecryptorProviderBuilder()
-                        .build("dlehdwls!2".toCharArray());
+                        .build("dlehdwls".toCharArray());
                 keyPair = converter.getKeyPair(ckp.decryptKeyPair(decProv));
             } else {
                 keyPair = converter.getKeyPair((PEMKeyPair) privateKeyPemObject);

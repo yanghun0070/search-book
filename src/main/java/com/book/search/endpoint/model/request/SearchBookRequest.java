@@ -9,6 +9,9 @@ import com.book.search.net.kakao.model.KakaoBookRequest;
 import com.book.search.net.naver.model.NaverBookRequest;
 import lombok.Data;
 
+/**
+ * 책 검색 요청데이터 정의
+ */
 @Data
 public class SearchBookRequest implements StoreTranslate {
     private String query;

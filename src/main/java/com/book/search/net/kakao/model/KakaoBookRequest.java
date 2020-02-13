@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * kakao 책검색 요청 데이터 셋 정의
+ */
 @AllArgsConstructor
 @Builder
 @Data

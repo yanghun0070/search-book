@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
+/**
+ * Login controller
+ */
 @Slf4j
-@Validated
 @RestController
 public class LoginController {
 
@@ -22,7 +22,7 @@ public class LoginController {
     LoginService loginService;
 
     @PostMapping(Endpoints.ACCOUNT_LOGIN)
-    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+    public LoginResponse login(@Validated @RequestBody LoginRequest request) {
         return loginService.run(request);
     }
 }

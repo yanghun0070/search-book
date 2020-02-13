@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 네이버 검색 결과 데이터 셋 정의
+ */
 @Slf4j
 @Data
 public class NaverBooksResponse implements BookResultData {

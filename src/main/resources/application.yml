@@ -10,10 +10,10 @@ spring:
       ddl-auto: create-drop
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:gid
+    url: jdbc:h2:mem:book
     username: sa
     password:
-    initialization-mode: always
+    initialization-mode: embedded
 
 
 book:

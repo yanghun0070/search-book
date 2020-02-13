@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.ConstraintViolationException;
 
+/**
+ * Exception handler
+ */
 @Slf4j
 @ControllerAdvice(basePackages = {"com.book.search"})
 public class SearchBookExceptionHandler {
@@ -58,7 +61,6 @@ public class SearchBookExceptionHandler {
     public ResponseEntity<ErrorResponse> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException ex) {
         return getResponseEntity(HttpStatus.BAD_REQUEST, ErrorCode.INVALID_REQUEST_INFO, ex.getParameterName());
     }
-
 
     @ExceptionHandler(InternalException.class)
     public ResponseEntity<ErrorResponse> internalExceptionHandler(InternalException e) {

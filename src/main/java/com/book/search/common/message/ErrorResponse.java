@@ -5,6 +5,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 응답 에러메시지 구조를 정의한 클래스이다.
+ */
 @Data
 public class ErrorResponse implements Serializable {
 

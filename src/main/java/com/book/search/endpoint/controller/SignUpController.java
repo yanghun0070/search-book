@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 회원 가입 controller
+ */
 @Slf4j
 @RestController
 public class SignUpController {
@@ -18,7 +21,6 @@ public class SignUpController {
 
     @PutMapping(Endpoints.ACCOUNT_SIGNUP)
     public void signUp(@Validated @RequestBody SignUpRequest request) {
-        log.debug("[SignUpController] request : {}", request);
         signUpService.run(request);
     }
 }

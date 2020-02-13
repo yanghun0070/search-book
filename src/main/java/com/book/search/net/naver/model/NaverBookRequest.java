@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
+ * 네이버 요청 데이터 셋 정의
+ *
  * display	integer	N
  * start	integer	N	1(기본값), 1000(최대)	검색 시작 위치로 최대 1000까지 가능	-
  * sort	string	N	sim(기본값), date	정렬 옵션: sim(유사도순), date(출간일순), count(판매량순)

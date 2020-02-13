@@ -1,5 +1,8 @@
 package com.book.search.endpoint;
 
+/**
+ * 필드 명 정의 클래스
+ */
 public class SerializedFieldNames {
     public static final String QUERY = "query";
     public static final String SIZE = "size";

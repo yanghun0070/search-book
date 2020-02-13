@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 로그인 요청시 로그인 아이디에 매핑되는 회원정보를 제공하는 클래스이다.
+ */
 @Component
 @RequiredArgsConstructor
 public class MemberDetailsService implements UserDetailsService {

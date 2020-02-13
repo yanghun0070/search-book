@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * kakao를 기본으로 한다.
- * API도 카카오와 동일하게 간다.
+ * 검색 카테고리를 정의한 클래스이다.
+ * 제목, isbn, pushisher, personㅡㅇ로 구성되며, keyword가 default로 구성된다.
+ * kakao를 기본으로 네이버 매핑한다.
+ *
  */
 public enum KeyTypeCode {
     TITLE("title", "title", "d_titl"),

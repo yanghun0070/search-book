@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 
 @ToString(exclude = "password")
+/**
+ * 회원가입 데이터 정의
+ */
 @Data
 public class SignUpRequest {
     @JsonProperty(value = SerializedFieldNames.NAME, required = true)

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.http.HttpStatus;
 
+/**
+ * error 발생시 처리 Exception
+ */
 @ToString
 public class ErrorException extends RuntimeException implements ErrorSources {
 

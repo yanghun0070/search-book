@@ -21,6 +21,10 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * JWT 안중 token을 검증하는 클래스이다.
+ *
+ */
 @Slf4j
 @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {

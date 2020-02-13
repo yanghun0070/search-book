@@ -8,6 +8,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * 검색 내역 정보를 저장 관리하는 테이블이다.
+ * 회원 식별자와 키워드로 구성된다.
+ */
 @NoArgsConstructor
 @Setter
 @Getter

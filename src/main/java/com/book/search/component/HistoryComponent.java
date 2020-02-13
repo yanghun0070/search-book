@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * 검색 내역 정보를 control 하는 클래스이다.
+ */
 @Component
 public class HistoryComponent {
 

@@ -5,6 +5,9 @@ import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 
+/**
+ * token parser결과를 저정하는 entity 클래스이다.
+ */
 public class JwtAuthenticationToken extends AbstractAuthenticationToken {
 
     private final transient Object principal;

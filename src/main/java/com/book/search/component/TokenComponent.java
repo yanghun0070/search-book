@@ -12,6 +12,10 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 
+/**
+ * JWT token에 대한
+ * JWE 처리 및 verify를 수행하는 클래스 이다.
+ */
 @Component
 public class TokenComponent {
 
@@ -36,7 +40,6 @@ public class TokenComponent {
             throw new InternalException("failed jwt generate.");
         }
     }
-
 
     public UserData verify(String jwt) throws ParseException, JOSEException, JsonProcessingException {
         return objectMapper.readValue(rsaSigner.verify(jwt), UserData.class);

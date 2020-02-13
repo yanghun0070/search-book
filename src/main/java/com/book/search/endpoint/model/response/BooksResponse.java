@@ -8,6 +8,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * 책 검색 결과 응답데이터 정의
+ */
 @Builder
 @Data
 public class BooksResponse {

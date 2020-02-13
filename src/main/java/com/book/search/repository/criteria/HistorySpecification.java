@@ -4,6 +4,9 @@ import com.book.search.common.data.entity.History;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.domain.Specification;
 
+/**
+ * history entity predicate 위한 Specification
+ */
 @Slf4j
 public class HistorySpecification {
 

@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * 카카오 책 데이터 셋 정의
+ */
 @Data
 public class BookDocument implements BookData {
     private List<String> authors;

@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 /**
- * Proxy-Authorization Bearer {jwt token}
- * Authorization Bearer {access token}
+ *
+ * Authorization Bearer {jwt token} 형태의 token을 extrat 하는 클래스 이다.
+ *
  */
 @Slf4j
 public class JwtTokenExtractor {

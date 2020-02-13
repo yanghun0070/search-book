@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * 체인 검색 기능 처리 클래스
+ */
 @Slf4j
 public abstract class SearchProcess implements ChainHandler<StoreTranslate, BookResultData> {
 

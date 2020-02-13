@@ -11,6 +11,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * chain형태로 구성된 beans를 관리하는 클래스
+ */
 @Component
 public class SearchProcessManager implements InitializingBean, HandlerChain<StoreTranslate, BookResultData> {
 

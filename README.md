@@ -45,7 +45,7 @@ PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | ×
 
 >token은 24시간 유효하며, JWT token이다. Token는 서버의 키로 signed되어 JWS형태로 제공된다.
 
->Key는 RSA 2048bit의 비대칭 키이다. key 파일은 rsa_key/book-rsa-key.pem에 존재한다.
+>Key는 RSA-256 2048bit의 비대칭 키이다. key 파일은 rsa_key/book-rsa-key.pem에 존재한다.
 
 
 

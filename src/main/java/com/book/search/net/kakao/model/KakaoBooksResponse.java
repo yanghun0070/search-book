@@ -8,6 +8,9 @@ import lombok.Data;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 카카오 책검색 결과데이터 정의 클래스
+ */
 @Data
 public class KakaoBooksResponse implements BookResultData {
     private MetaData meta;
