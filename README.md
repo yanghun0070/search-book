@@ -50,16 +50,18 @@ PUT	| /account/sign-up | 회원 가입 서비스를 제공한다. | ×
 
 
 * * *
-### 테스트 
+### Quick Start 
 >아래 절차대로 소스를 다운 및 컴파일 하고, Application을 실행한다. 
 
->1.$ git clone https://github.com/djzend2k/search-book.git
+> Check out sources  
+ `git clone https://github.com/djzend2k/search-book.git`
 
->2.$ cd search-book/
+> Compile and test  
+ `cd search-book/`   
+ `./gradlew build`
 
->3.$ ./gradlew build -x test
-
->4.$ ./gradlew bootRun
+> Run   
+ `./gradlew bootRun`
 
 >Application이 실행되면 아래 회원가입/ 로그인/ 책 검색/ 내 검색 히스토리/ 인기검색 키워드 테스트가 가능하다.
 
@@ -169,7 +171,7 @@ application.yml 파일의 book.kakao.uri를 변경하고 요청시 테스트가 
 #### 4. 내 검색 히스토리
 >내 검색 키워드 히스토리 검색 키워드 역순으로 제공된다.
 
->페이징 처리를 위해 size와 page 파라미터를 Optional로 제공된다(default size = 0, page = 1).
+>페이징 처리를 위해 size와 page 파라미터를 Optional로 제공된다(default size = 10, page = 1).
 
 >인증세션이 존재하여야하며 책 검색과 동일하게 로그인시 발급 받은 jwt token을 Authorization Bearer 형태로 전송 해야한다.
 
@@ -180,28 +182,19 @@ curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H
 >응답 메시지는 keyword와 date로 구성된다.
 아래 구조와 동일하다.
 ``` 
- {
+{
   "histories" : [ {
-    "keyworld" : "test",
-    "date" : "2020-02-12 21:59:45"
+    "keyworld" : "love",
+    "date" : "2020-02-13 18:07:22"
   }, {
-    "keyworld" : "test",
-    "date" : "2020-02-12 21:59:31"
-  }, {
-    "keyworld" : "test",
-    "date" : "2020-02-12 21:59:03"
+    "keyworld" : "love",
+    "date" : "2020-02-13 18:07:18"
   }, {
     "keyworld" : "딸",
     "date" : "2020-02-10 20:15:01"
-  }, {
-    "keyworld" : "엄마",
-    "date" : "2020-02-09 20:15:01"
-  }, {
-    "keyworld" : "아빠",
-    "date" : "2020-02-08 20:15:01"
   } ],
-  "total_count" : 6,
-  "page_count" : 1
+  "total_count" : 5,
+  "page_count" : 2
 }
 ``` 
 ####  5. 인기 키워드 목록
@@ -218,17 +211,17 @@ curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H
 ```
 {
   "keywords" : [ {
-    "count" : "3",
-    "keyword" : "test"
-  }, {
     "count" : "2",
     "keyword" : "아빠"
   }, {
-    "count" : "1",
-    "keyword" : "할비"
+    "count" : "2",
+    "keyword" : "love"
   }, {
     "count" : "1",
     "keyword" : "할미"
+  }, {
+    "count" : "1",
+    "keyword" : "할비"
   }, {
     "count" : "1",
     "keyword" : "딸"
@@ -240,4 +233,4 @@ curl -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H
 ```
 
 ## Notes
->build in spring boot framework version 2.2.4.RELEASE
+> build in spring boot framework version 2.2.4.RELEASE
